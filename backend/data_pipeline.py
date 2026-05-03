@@ -62,19 +62,26 @@ def populate_db():
         
     download_and_extract()
     import re
-    print("Parsing BibTeX using robust Regex block splitting... This will be fast and reliable!")
+    print("Parsing BibTeX using memory-efficient streaming... This will be fast and reliable!")
     
-    count = 0
-    with open(BIB_FILE, 'r', encoding='utf-8') as f:
-        content = f.read()
-        
-    # Split the massive file by new entries
-    entries = re.split(r'\n@', content)
-    
+    def entry_generator(file_path):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            current_entry = ""
+            for line in f:
+                if line.startswith('@'):
+                    if current_entry:
+                        yield current_entry
+                    current_entry = line
+                else:
+                    current_entry += line
+            if current_entry:
+                yield current_entry
+
     # Regex to split an entry into key-value parts
     field_split_re = re.compile(r'\n\s*([a-zA-Z_]+)\s*=\s*')
     
-    for raw_entry in entries:
+    count = 0
+    for raw_entry in entry_generator(BIB_FILE):
         raw_entry = raw_entry.strip()
         if not raw_entry:
             continue
@@ -86,7 +93,6 @@ def populate_db():
         parts = field_split_re.split(raw_entry)
         
         entry_dict = {}
-        # parts[0] is the entry header (e.g., "inproceedings{id,")
         # Following elements are alternating keys and values
         for i in range(1, len(parts) - 1, 2):
             key = parts[i].lower()

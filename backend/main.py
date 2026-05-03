@@ -12,9 +12,7 @@ import data_pipeline
 
 app = FastAPI()
 
-# Mount frontend directory to serve static files
 frontend_dir = os.path.join(os.path.dirname(__file__), "../frontend")
-app.mount("/frontend", StaticFiles(directory=frontend_dir), name="frontend")
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,7 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Run data pipeline on startup in a separate thread so server starts quickly
+# Run data pipeline on startup in a separate thread
 @app.on_event("startup")
 def startup_event():
     print("Running data pipeline check on startup...")
@@ -35,6 +33,7 @@ class SearchRequest(BaseModel):
     query_type: str # "keywords" or "abstract"
     sort_by: Optional[str] = "relevance"
 
+# API routes (defined before static mount)
 @app.post("/api/search")
 def search(request: SearchRequest):
     query = request.query.strip()
@@ -64,6 +63,9 @@ def search(request: SearchRequest):
         "results": results,
         "extracted_keywords": extracted_keywords if request.query_type == "abstract" else []
     }
+
+# Serve static files from the root last
+app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
 @app.get("/debug")
 def debug_clembench():
