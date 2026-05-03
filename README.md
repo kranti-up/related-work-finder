@@ -9,7 +9,7 @@ license: cc-by-nc-4.0
 ---
 # Related Work Finder
 
-**Live Demo**: https://huggingface.co/spaces/upk/Related-Work-Finder
+**Live Demo**: [Related Work Finder](https://huggingface.co/spaces/upk/Related-Work-Finder)
 
 A search engine designed to find relevant papers from the ACL Anthology. 
 
