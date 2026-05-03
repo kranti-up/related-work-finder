@@ -1,3 +1,12 @@
+---
+title: Related Work Finder
+emoji: 📚
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+license: cc-by-nc-4.0
+---
 # Related Work Finder
 
 **Live Demo**: 
