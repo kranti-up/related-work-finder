@@ -9,9 +9,9 @@ license: cc-by-nc-4.0
 ---
 # Related Work Finder
 
-**Live Demo**: 
+**Live Demo**: https://huggingface.co/spaces/upk/Related-Work-Finder
 
-A search engine designed to help researchers find relevant computer science and AI papers from the ACL Anthology. 
+A search engine designed to find relevant papers from the ACL Anthology. 
 
 ## Current Features
 
