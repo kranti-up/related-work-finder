@@ -1,0 +1,13 @@
+# Python environment
+venv/
+__pycache__/
+*.pyc
+
+# Database and Datasets (Do not commit these massive files!)
+backend/papers.db
+backend/anthology*.bib*
+backend/dump.txt
+
+# Editor / OS files
+.DS_Store
+.vscode/

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS/AI Related Work Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Related Work Finder</h1>
+            <p>Discover relevant research papers from the ACL Anthology</p>
+        </header>
+
+        <main>
+            <div class="search-box glass-panel">
+                <div class="search-type-toggle">
+                    <button class="toggle-btn active" data-type="keywords">Keywords</button>
+                    <button class="toggle-btn" data-type="abstract">Abstract</button>
+                </div>
+                
+                <textarea id="search-input" placeholder="Enter keywords (e.g., transformer, attention) or paste an abstract..."></textarea>
+                
+                <div class="search-controls">
+                    <div class="sort-options">
+                        <label>Sort by:</label>
+                        <select id="sort-select">
+                            <option value="relevance">Relevance</option>
+                            <option value="year">Year (Newest First)</option>
+                        </select>
+                    </div>
+                    <button id="search-btn" class="primary-btn">
+                        <span class="btn-text">Search</span>
+                        <div class="spinner hidden"></div>
+                    </button>
+                </div>
+            </div>
+
+            <div id="results-container" class="hidden">
+                <div id="extracted-keywords" class="hidden">
+                    <h3>Extracted Keywords:</h3>
+                    <div class="tags"></div>
+                </div>
+                
+                <div class="results-header">
+                    <h2>Search Results</h2>
+                    <span id="results-count">0 papers found</span>
+                </div>
+                
+                <div id="papers-list">
+                    <!-- Papers will be injected here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
